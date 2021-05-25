@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kgc.demo.dao.HistoryMapper" >
+  <resultMap id="BaseResultMap" type="cn.kgc.demo.pojo.History" >
+    <id column="hid" property="hid" jdbcType="INTEGER" />
+    <result column="hstarttime" property="hstarttime" jdbcType="TIMESTAMP" />
+    <result column="hendtime" property="hendtime" jdbcType="TIMESTAMP" />
+    <result column="hcity" property="hcity" jdbcType="VARCHAR" />
+    <result column="hwork" property="hwork" jdbcType="VARCHAR" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    hid, hstarttime, hendtime, hcity, hwork, eid
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from history
+    where hid = #{hid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from history
+    where hid = #{hid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="cn.kgc.demo.pojo.History" >
+    insert into history (hid, hstarttime, hendtime, 
+      hcity, hwork, eid)
+    values (#{hid,jdbcType=INTEGER}, #{hstarttime,jdbcType=TIMESTAMP}, #{hendtime,jdbcType=TIMESTAMP}, 
+      #{hcity,jdbcType=VARCHAR}, #{hwork,jdbcType=VARCHAR}, #{eid,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="insertSelective" parameterType="cn.kgc.demo.pojo.History" >
+    insert into history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hid != null" >
+        hid,
+      </if>
+      <if test="hstarttime != null" >
+        hstarttime,
+      </if>
+      <if test="hendtime != null" >
+        hendtime,
+      </if>
+      <if test="hcity != null" >
+        hcity,
+      </if>
+      <if test="hwork != null" >
+        hwork,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hid != null" >
+        #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="hstarttime != null" >
+        #{hstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hendtime != null" >
+        #{hendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hcity != null" >
+        #{hcity,jdbcType=VARCHAR},
+      </if>
+      <if test="hwork != null" >
+        #{hwork,jdbcType=VARCHAR},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="cn.kgc.demo.pojo.History" >
+    update history
+    <set >
+      <if test="hstarttime != null" >
+        hstarttime = #{hstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hendtime != null" >
+        hendtime = #{hendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hcity != null" >
+        hcity = #{hcity,jdbcType=VARCHAR},
+      </if>
+      <if test="hwork != null" >
+        hwork = #{hwork,jdbcType=VARCHAR},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="cn.kgc.demo.pojo.History" >
+    update history
+    set hstarttime = #{hstarttime,jdbcType=TIMESTAMP},
+      hendtime = #{hendtime,jdbcType=TIMESTAMP},
+      hcity = #{hcity,jdbcType=VARCHAR},
+      hwork = #{hwork,jdbcType=VARCHAR},
+      eid = #{eid,jdbcType=INTEGER}
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+
+</mapper>
